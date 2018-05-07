@@ -22,6 +22,7 @@ from view_finder import ViewFinder # noqa
 from test_finder import TestFinder # noqa
 from spec_finder import SpecFinder # noqa
 from command_finder import CommandFinder # noqa
+from decorator_finder import DecoratorFinder # noqa
 
 
 class Source(Base):
@@ -63,6 +64,9 @@ class Source(Base):
         self.vim.command('highlight link deniteSource_railsSpec Number')
         self.vim.command('syntax match deniteSource_railsCommand /Command:/')
         self.vim.command('highlight link deniteSource_railsCommand String')
+        self.vim.command('syntax match deniteSource_railsDecorator /Decorator:/')
+        self.vim.command('highlight link deniteSource_railsDecorator String')
+
 
     def gather_candidates(self, context):
         file_list = self._find_files(context)
@@ -80,6 +84,8 @@ class Source(Base):
             finder_class = ModelFinder
         elif target == 'command':
             finder_class = CommandFinder
+        elif target == 'decorator':
+            finder_class = DecoratorFinder
         elif target == 'controller':
             finder_class = ControllerFinder
         elif target == 'helper':
