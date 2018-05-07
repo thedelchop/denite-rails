@@ -24,6 +24,7 @@ from spec_finder import SpecFinder # noqa
 from command_finder import CommandFinder # noqa
 from decorator_finder import DecoratorFinder # noqa
 from job_finder import JobFinder # noqa
+from mailer_finder import MailerFinder # noqa
 
 
 class Source(Base):
@@ -69,6 +70,8 @@ class Source(Base):
         self.vim.command('highlight link deniteSource_railsDecorator String')
         self.vim.command('syntax match deniteSource_railsJob /Job:/')
         self.vim.command('highlight link deniteSource_railsJob String')
+        self.vim.command('syntax match deniteSource_railsMailer /Mailer:/')
+        self.vim.command('highlight link deniteSource_railsMailer String')
 
 
     def gather_candidates(self, context):
@@ -89,6 +92,8 @@ class Source(Base):
             finder_class = CommandFinder
         elif target == 'job':
             finder_class = JobFinder
+        elif target == 'mailer':
+            finder_class = MailerFinder
         elif target == 'decorator':
             finder_class = DecoratorFinder
         elif target == 'controller':
