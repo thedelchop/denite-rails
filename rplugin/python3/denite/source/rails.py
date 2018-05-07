@@ -23,6 +23,7 @@ from test_finder import TestFinder # noqa
 from spec_finder import SpecFinder # noqa
 from command_finder import CommandFinder # noqa
 from decorator_finder import DecoratorFinder # noqa
+from job_finder import JobFinder # noqa
 
 
 class Source(Base):
@@ -66,6 +67,8 @@ class Source(Base):
         self.vim.command('highlight link deniteSource_railsCommand String')
         self.vim.command('syntax match deniteSource_railsDecorator /Decorator:/')
         self.vim.command('highlight link deniteSource_railsDecorator String')
+        self.vim.command('syntax match deniteSource_railsJob /Job:/')
+        self.vim.command('highlight link deniteSource_railsJob String')
 
 
     def gather_candidates(self, context):
@@ -84,6 +87,8 @@ class Source(Base):
             finder_class = ModelFinder
         elif target == 'command':
             finder_class = CommandFinder
+        elif target == 'job':
+            finder_class = JobFinder
         elif target == 'decorator':
             finder_class = DecoratorFinder
         elif target == 'controller':
